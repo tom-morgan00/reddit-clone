@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  return <div>Hello</div>;
+  return <div>Reddit Clone</div>;
 };
 
 export default Home;

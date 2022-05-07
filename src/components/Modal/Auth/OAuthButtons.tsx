@@ -1,7 +1,8 @@
-import { Button, Flex, Image } from '@chakra-ui/react';
+import { Button, Flex, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { auth } from '../../../firebase/clientApp';
+import { FIREBASE_ERRORS } from '../../../firebase/errors';
 
 type OAuthButtonsProps = {};
 
@@ -23,6 +24,11 @@ const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
         {/* <Image src="/images/googlelogo.png" alt="GitHub" height="20px" /> */}
         Continue with GitHub
       </Button>
+      {error && (
+        <Text fontSize="10pt" color="red.500" mb={2}>
+          {error.message}
+        </Text>
+      )}
     </Flex>
   );
 };

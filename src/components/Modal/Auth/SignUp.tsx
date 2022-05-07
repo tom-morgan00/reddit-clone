@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { authModalState } from '../../../atoms/authModalAtom';
 import { auth } from '../../../firebase/clientApp';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { FIREBASE_ERRORS } from '../../../firebase/errors';
 
 type SignUpProps = {};
 
@@ -20,9 +21,10 @@ const SignUp: React.FC<SignUpProps> = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormError('');
 
     if (signupForm.password !== signupForm.confirmPassword) {
-      setFormError('Passwords do not match');
+      setFormError('Passwords do not match.');
       return;
     }
     console.log(signupForm.email, signupForm.password);
@@ -38,6 +40,7 @@ const SignUp: React.FC<SignUpProps> = () => {
     <form onSubmit={onSubmit}>
       <Input
         required
+        autoFocus
         name="email"
         type="email"
         placeholder="Email"
@@ -102,11 +105,10 @@ const SignUp: React.FC<SignUpProps> = () => {
         }}
         bg="gray.50"
       />
-      {formError && (
-        <Text fontSize="10pt" color="red.500" mb={2}>
-          {formError}
-        </Text>
-      )}
+      <Text textAlign="center" fontSize="10pt" color="red.500" mb={2}>
+        {formError ||
+          FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
+      </Text>
       <Button
         type="submit"
         width="100%"

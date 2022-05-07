@@ -5,7 +5,7 @@ import SearchInput from './SearchInput';
 
 const Navbar: React.FC = () => {
   return (
-    <Flex bg="white" height="48px" padding="8px 12px">
+    <Flex bg="white" padding="4px 12px" boxShadow="md">
       <Flex alignItems="center">
         <Image src="/images/redditFace.svg" alt="reddit" height="32px" />
         <Image

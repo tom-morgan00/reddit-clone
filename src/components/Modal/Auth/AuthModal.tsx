@@ -49,7 +49,7 @@ const AuthModal: React.FC = () => {
               width="70%"
             >
               <OAuthButtons />
-              <Text color="gray.500" fontWeight={500}>
+              <Text fontSize="10pt" color="gray.500" fontWeight={500}>
                 OR
               </Text>
               <AuthInputs />
