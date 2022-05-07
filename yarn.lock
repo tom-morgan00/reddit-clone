@@ -3277,10 +3277,10 @@
     "string_decoder" "~1.1.1"
     "util-deprecate" "~1.0.1"
 
-"recoil@^0.7.3-alpha.1":
-  "integrity" "sha512-jIcHieOD2F8pStmBCtAVqQPlKKAYkBF4lM5hXrrZrN83+uvdyJIXgBLz1iZ0ozkUqibN65Z8OsBUnB2nQM9q5g=="
-  "resolved" "https://registry.npmjs.org/recoil/-/recoil-0.7.3-alpha.1.tgz"
-  "version" "0.7.3-alpha.1"
+"recoil@^0.6.1":
+  "integrity" "sha512-J7oT3LZl2vpyFClgSUpOQjpykz84VSX/NJE/PavAtR8n7Z+whEdVBPUtwc2TEWjONeL/lJmiac2XQ+qEOQA52Q=="
+  "resolved" "https://registry.npmjs.org/recoil/-/recoil-0.6.1.tgz"
+  "version" "0.6.1"
   dependencies:
     "hamt_plus" "1.0.2"
 
