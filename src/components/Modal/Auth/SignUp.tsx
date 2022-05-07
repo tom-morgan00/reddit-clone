@@ -1,19 +1,33 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { FormEventHandler, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authModalState } from '../../../atoms/authModalAtom';
+import { auth } from '../../../firebase/clientApp';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
+  const [formError, setFormError] = useState('');
   const [signupForm, setSignupForm] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   });
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
-  const onSubmit = () => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (signupForm.password !== signupForm.confirmPassword) {
+      setFormError('Passwords do not match');
+      return;
+    }
+    console.log(signupForm.email, signupForm.password);
+    createUserWithEmailAndPassword(signupForm.email, signupForm.password);
+  };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignupForm((prev) => ({
       ...prev,
@@ -21,8 +35,9 @@ const SignUp: React.FC<SignUpProps> = () => {
     }));
   };
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Input
+        required
         name="email"
         type="email"
         placeholder="Email"
@@ -44,6 +59,7 @@ const SignUp: React.FC<SignUpProps> = () => {
         bg="gray.50"
       />
       <Input
+        required
         name="password"
         type="password"
         placeholder="Password"
@@ -65,6 +81,7 @@ const SignUp: React.FC<SignUpProps> = () => {
         bg="gray.50"
       />
       <Input
+        required
         name="confirmPassword"
         type="password"
         placeholder="Confirm Password"
@@ -85,7 +102,18 @@ const SignUp: React.FC<SignUpProps> = () => {
         }}
         bg="gray.50"
       />
-      <Button type="submit" width="100%" height="36px" my={2}>
+      {formError && (
+        <Text fontSize="10pt" color="red.500" mb={2}>
+          {formError}
+        </Text>
+      )}
+      <Button
+        type="submit"
+        width="100%"
+        height="36px"
+        my={2}
+        isLoading={loading}
+      >
         Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
