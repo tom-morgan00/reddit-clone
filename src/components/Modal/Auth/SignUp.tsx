@@ -3,29 +3,26 @@ import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authModalState } from '../../../atoms/authModalAtom';
 
-type LoginProps = {};
+type SignUpProps = {};
 
-const Login: React.FC<LoginProps> = () => {
+const SignUp: React.FC<SignUpProps> = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
-  const [loginForm, setLoginForm] = useState({
+  const [signupForm, setSignupForm] = useState({
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
-  // Firebase Logic
   const onSubmit = () => {};
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // update form state
-    setLoginForm((prev) => ({
+    setSignupForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
   return (
     <form>
       <Input
-        required
         name="email"
         type="email"
         placeholder="Email"
@@ -47,7 +44,6 @@ const Login: React.FC<LoginProps> = () => {
         bg="gray.50"
       />
       <Input
-        required
         name="password"
         type="password"
         placeholder="Password"
@@ -68,11 +64,32 @@ const Login: React.FC<LoginProps> = () => {
         }}
         bg="gray.50"
       />
-      <Button width="100%" height="36px" my={2} type="submit">
-        Log In
+      <Input
+        name="confirmPassword"
+        type="password"
+        placeholder="Confirm Password"
+        onChange={onChange}
+        mb={2}
+        fontSize="10pt"
+        _placeholder={{ color: 'gray.500' }}
+        _hover={{
+          bg: 'white',
+          border: '1px solid',
+          borderColor: 'blue.500',
+        }}
+        _focus={{
+          outline: 'none',
+          bg: 'white',
+          border: '1px solid',
+          borderColor: 'blue.500',
+        }}
+        bg="gray.50"
+      />
+      <Button type="submit" width="100%" height="36px" my={2}>
+        Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={2}>New here?</Text>
+        <Text mr={2}>Already a redditor?</Text>
         <Text
           color="blue.500"
           letterSpacing="0"
@@ -81,14 +98,14 @@ const Login: React.FC<LoginProps> = () => {
           onClick={() =>
             setAuthModalState((prev) => ({
               ...prev,
-              view: 'signup',
+              view: 'login',
             }))
           }
         >
-          SIGN UP
+          LOG IN
         </Text>
       </Flex>
     </form>
   );
 };
-export default Login;
+export default SignUp;
