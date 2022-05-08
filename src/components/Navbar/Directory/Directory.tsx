@@ -53,8 +53,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <ChevronDownIcon />
         </Flex>
       </MenuButton>
-      <MenuList justifyContent="space-between" mt={2} py={2} minWidth="180px">
-        <MenuGroup title="MODERATING" fontSize="7pt" color="gray.500">
+      <MenuList justifyContent="space-between" mt={2} py={4} minWidth="180px">
+        <MenuGroup title="MODERATING" fontSize="7pt" color="gray.500" mb={1}>
           <MenuItem
             fontSize="10pt"
             _hover={{ bg: 'gray.100' }}

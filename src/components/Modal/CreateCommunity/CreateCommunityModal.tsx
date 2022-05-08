@@ -109,7 +109,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
           <Box px={3}>
             <ModalCloseButton />
             <ModalBody padding="10px 0" display="flex" flexDir="column">
-              <Text fontWeight={600} fontSize={15}>
+              <Text fontWeight={600} fontSize={15} mb={1}>
                 Name
               </Text>
               <Text fontSize={11} color="gray.500">
@@ -143,7 +143,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                 {error}
               </Text>
               <Box my={4}>
-                <Text fontWeight={600} fontSize={15}>
+                <Text fontWeight={600} fontSize={15} mb={1}>
                   Community Type
                 </Text>
                 <Stack spacing={2}>

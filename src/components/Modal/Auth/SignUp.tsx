@@ -1,5 +1,5 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import React, { FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authModalState } from '../../../atoms/authModalAtom';
 import { auth } from '../../../firebase/clientApp';
@@ -16,7 +16,7 @@ const SignUp: React.FC<SignUpProps> = () => {
     password: '',
     confirmPassword: '',
   });
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, userCred, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,6 +35,22 @@ const SignUp: React.FC<SignUpProps> = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  // HOW TO CREATE USER DOCUMENTS WITHOUT CLOUD FUNCTIONS
+  // const parseUser = (user: User) => {
+  //   return JSON.parse(JSON.stringify(user));
+  // };
+
+  // const createUserDocument = async (user: User) => {
+  //   await addDoc(collection(firestore, 'users'), parseUser(user));
+  // };
+
+  // useEffect(() => {
+  //   if (userCred) {
+  //     createUserDocument(userCred.user);
+  //   }
+  // }, [userCred]);
+
   return (
     <form onSubmit={onSubmit}>
       <Input

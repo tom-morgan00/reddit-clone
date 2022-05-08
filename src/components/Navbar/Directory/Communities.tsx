@@ -13,7 +13,13 @@ const Communities: React.FC<CommunitiesProps> = () => {
   return (
     <>
       <CreateCommunityModal open={open} handleClose={handleClose} />
-      <MenuGroup title="MY COMMUNITIES" fontSize="7pt" color="gray.500">
+      <MenuGroup
+        title="MY COMMUNITIES"
+        fontSize="7pt"
+        color="gray.500"
+        mb={1}
+        mt={4}
+      >
         <MenuItem
           fontSize="10pt"
           _hover={{ bg: 'gray.100' }}
