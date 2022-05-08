@@ -20,8 +20,6 @@ const Login: React.FC<LoginProps> = () => {
   // Firebase Logic
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // console.log(loginForm.email, loginForm.password);
     signInWithEmailAndPassword(loginForm.email, loginForm.password);
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,6 +86,22 @@ const Login: React.FC<LoginProps> = () => {
       <Button width="100%" height="36px" my={2} type="submit">
         Log In
       </Button>
+      <Flex fontSize="9pt" justifyContent="center" mb={2}>
+        <Text mr={2}>Forgot password?</Text>
+        <Text
+          color="blue.500"
+          letterSpacing="0"
+          cursor="pointer"
+          onClick={() =>
+            setAuthModalState((prev) => ({
+              ...prev,
+              view: 'resetPassword',
+            }))
+          }
+        >
+          Reset
+        </Text>
+      </Flex>
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={2}>New here?</Text>
         <Text

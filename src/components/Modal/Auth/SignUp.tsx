@@ -27,7 +27,6 @@ const SignUp: React.FC<SignUpProps> = () => {
       setFormError('Passwords do not match.');
       return;
     }
-    console.log(signupForm.email, signupForm.password);
     createUserWithEmailAndPassword(signupForm.email, signupForm.password);
   };
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,6 +117,7 @@ const SignUp: React.FC<SignUpProps> = () => {
       >
         Sign Up
       </Button>
+
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={2}>Already a redditor?</Text>
         <Text
