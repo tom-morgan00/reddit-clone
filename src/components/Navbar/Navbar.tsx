@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
       boxShadow="md"
       justifyContent="space-between"
     >
-      <Flex alignItems="center">
+      <Flex alignItems="center" mr={2}>
         <Image src="/images/redditFace.svg" alt="reddit" height="32px" />
         <Image
           src="/images/redditText.svg"

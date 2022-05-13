@@ -16,7 +16,13 @@ import {
   Icon,
   Divider,
 } from '@chakra-ui/react';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  runTransaction,
+  serverTimestamp,
+  setDoc,
+} from 'firebase/firestore';
 import React, { useState } from 'react';
 import { BsFillPersonFill, BsFillEyeFill } from 'react-icons/bs';
 import { HiLockClosed } from 'react-icons/hi';
@@ -73,17 +79,32 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     try {
       // check if community already exists
       const communityDocRef = doc(firestore, 'communities', communityName);
-      const communityDoc = await getDoc(communityDocRef);
-      if (communityDoc.exists()) {
-        throw new Error(`Sorry, r/${communityName} already exists.`);
-      }
 
-      // create the community in firestore
-      await setDoc(communityDocRef, {
-        creatorId: user?.uid,
-        createdAt: serverTimestamp(),
-        numberOfMembers: 1,
-        privacyType: communityType,
+      await runTransaction(firestore, async (transation) => {
+        const communityDoc = await transation.get(communityDocRef);
+
+        if (communityDoc.exists()) {
+          throw new Error(`Sorry, r/${communityName} already exists.`);
+        }
+
+        // create the community in firestore
+        transation.set(communityDocRef, {
+          creatorId: user?.uid,
+          createdAt: serverTimestamp(),
+          numberOfMembers: 1,
+          privacyType: communityType,
+        });
+
+        console.log(communityName);
+
+        // create snippet on user
+        transation.set(
+          doc(firestore, `users/${user?.uid}/communitySnippets`, communityName),
+          {
+            communityId: communityName,
+            isModerator: true,
+          }
+        );
       });
     } catch (err: any) {
       console.log('handleCreateCommunity Error: ', err);
